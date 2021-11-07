@@ -68,7 +68,7 @@ namespace ArdaPos
 
                         subItem[3].Text = total.ToString();
                         subItem[2].Text = values[0] + " x " + total / price;
-                        subItem[4].Text += ", " + $"{DateTime.Now.ToString("HH:mm")}'de tekrar sipariş verildi.";
+                        subItem[4].Text += " " + $"{DateTime.Now.ToString("HH:mm")}'de tekrar sipariş verildi.";
                         break;
                     }
                     index++;
@@ -172,7 +172,7 @@ namespace ArdaPos
 
             toolTip.SetToolTip(this.btnToplam, "Siparişlerin Toplamını Alır.");
             toolTip.SetToolTip(this.btnSummary, "Daha Önceki Siparişlerin Özetini Gösterir.");
-            toolTip.SetToolTip(this.btnDetail, "Daha Önceki Siparişleri Detayıyla Gösterir.");
+            toolTip.SetToolTip(this.btnDetail, "Daha Önceki Siparişleri Detayıyla Gösterir. (Excel)");
             toolTip.SetToolTip(this.btnTemizle, "Listedeki Siparişleri Temizler.");
             toolTip.SetToolTip(this.btnHesap1, "Masa 1'in Hesabını Alır.");
             toolTip.SetToolTip(this.btnHesap2, "Masa 2'nin Hesabını Alır.");
@@ -186,7 +186,7 @@ namespace ArdaPos
             if (sum == 0)
                 return;
 
-            var dialog = MessageBox.Show(tableNo + "'in hesabı: " + sum + " TL. \nHesabı kapatmak istiyor musunuz ?", "Hesap Ekstresi", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            var dialog = MessageBox.Show(tableNo + "'in hesabı: " + sum + " TL. \nHesabı kapatmak istiyor musunuz ?", "Hesap Ekstresi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dialog == DialogResult.Yes)
             {
@@ -248,7 +248,7 @@ namespace ArdaPos
                     summary = seperate[0] + " x " + (total / price).ToString();
                     index++;
                 }
-                if (orderList.Count() > index && !orderList[index].Orders.Contains(seperate[0]))
+                if ((orderList.Count() > index && !orderList[index].Orders.Contains(seperate[0])) || orderList.Count() == index)
                 {
                     detail += summary + $" kez satıldı. Toplam : {total} TL\n\n";
                     total = 0;
@@ -307,6 +307,8 @@ namespace ArdaPos
             File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
             //Close Excel package
             excel.Dispose();
+
+            MessageBox.Show("Bütün satışlar, Excel dosyası olarak kaydedildi.\n Dosya yolu: " + p_strPath, "Dosya Adresi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
