@@ -65,4 +65,3 @@ C:\Users\Kamil\source\repos\ArdaPos\ArdaPos\obj\Debug\net5.0-windows\ArdaPos.dll
 C:\Users\Kamil\source\repos\ArdaPos\ArdaPos\obj\Debug\net5.0-windows\ref\ArdaPos.dll
 C:\Users\Kamil\source\repos\ArdaPos\ArdaPos\obj\Debug\net5.0-windows\ArdaPos.pdb
 C:\Users\Kamil\source\repos\ArdaPos\ArdaPos\obj\Debug\net5.0-windows\ArdaPos.genruntimeconfig.cache
-C:\Users\Kamil\source\repos\ArdaPos\ArdaPos\obj\Debug\net5.0-windows\ArdaPos.csproj.CopyComplete
