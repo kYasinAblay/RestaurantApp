@@ -238,7 +238,7 @@ namespace ArdaPos
             // colSip
             // 
             this.colSip.Text = "Siparişler";
-            this.colSip.Width = 350;
+            this.colSip.Width = 250;
             // 
             // colTutar
             // 
@@ -248,7 +248,7 @@ namespace ArdaPos
             // colAciklama
             // 
             this.colAciklama.Text = "Açıklama";
-            this.colAciklama.Width = 400;
+            this.colAciklama.Width = 540;
             // 
             // contextMenuStrip
             // 
