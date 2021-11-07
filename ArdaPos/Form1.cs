@@ -180,13 +180,13 @@ namespace ArdaPos
         private void Hesap_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
-            var tableNo = button.Name == "btnHesap1" ? "Masa 1'in" : "Masa 2'nin";
+            var tableNo = button.Name == "btnHesap1" ? "Masa 1" : "Masa 2";
 
             var sum = Total(tableNo);
             if (sum == 0)
                 return;
 
-            var dialog = MessageBox.Show(tableNo + " hesabı: " + sum + " TL. \nHesabı kapatmak istiyor musunuz ?", "Hesap Ekstresi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var dialog = MessageBox.Show(tableNo + "'in hesabı: " + sum + " TL. \nHesabı kapatmak istiyor musunuz ?", "Hesap Ekstresi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dialog == DialogResult.Yes)
             {
