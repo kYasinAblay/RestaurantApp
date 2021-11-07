@@ -177,7 +177,6 @@ namespace ArdaPos
             toolTip.SetToolTip(this.btnHesap1, "Masa 1'in Hesabını Alır.");
             toolTip.SetToolTip(this.btnHesap2, "Masa 2'nin Hesabını Alır.");
         }
-
         private void Hesap_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
