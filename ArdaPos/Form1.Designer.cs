@@ -174,6 +174,7 @@ namespace ArdaPos
             this.btnSummary.Size = new System.Drawing.Size(58, 62);
             this.btnSummary.TabIndex = 5;
             this.btnSummary.UseVisualStyleBackColor = false;
+            this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
             // 
             // btnToplam
             // 

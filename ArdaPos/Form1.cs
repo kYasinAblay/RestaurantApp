@@ -216,5 +216,21 @@ namespace ArdaPos
                 listItem.Text = (index++).ToString();
             }
         }
+        private void btnSummary_Click(object sender, EventArgs e)
+        {
+            string summary = "";
+            foreach (var order in db.Orders.OrderBy(d => d.Orders))
+            {
+                if (order.Orders.Contains())
+                {
+
+                }
+                //if (summary == "")
+                //{
+
+                //}
+            }
+            MessageBox.Show("Sipariş Özeti :");
+        }
     }
 }
