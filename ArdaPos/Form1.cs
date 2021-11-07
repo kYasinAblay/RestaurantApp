@@ -145,11 +145,14 @@ namespace ArdaPos
         }
         private void btnTemizle_Click(object sender, EventArgs e)
         {
-            var dialog = MessageBox.Show("Bütün Siparişleri Temizlemek İstiyor musunuz ?", "Sipariş Temizle", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
-            if (dialog == DialogResult.Yes)
+            if (siparisListView.Items.Count > 0)
             {
-                CreateOrder();
-                siparisListView.Items.Clear();
+                var dialog = MessageBox.Show("Bütün Siparişleri Temizlemek İstiyor musunuz ?", "Sipariş Temizle", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                if (dialog == DialogResult.Yes)
+                {
+                    CreateOrder();
+                    siparisListView.Items.Clear();
+                }
             }
         }
         public DataContext CreateDbContext()
