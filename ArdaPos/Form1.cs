@@ -193,10 +193,9 @@ namespace ArdaPos
                 TakeOwe(tableNo);
             }
         }
-
         private void btnToplam_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Bugün Toplam Kazanç ; " + Total() + " TL", "Z Raporu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Sipariş Listesindeki Toplam Kazanç ; " + Total() + " TL", "Z Raporu", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void silToolStripMenuItem_Click(object sender, EventArgs e)
@@ -209,6 +208,12 @@ namespace ArdaPos
             if (selectRowIndex != -1)
             {
                 siparisListView.Items[selectRowIndex].Remove();
+            }
+            var index = 1;
+            foreach (var item in siparisListView.Items)
+            {
+                var listItem = (item as ListViewItem).SubItems[0];
+                listItem.Text = (index++).ToString();
             }
         }
     }
