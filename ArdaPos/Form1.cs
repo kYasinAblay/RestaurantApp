@@ -219,18 +219,43 @@ namespace ArdaPos
         private void btnSummary_Click(object sender, EventArgs e)
         {
             string summary = "";
-            foreach (var order in db.Orders.OrderBy(d => d.Orders))
+            string detail = "";
+            var orderList = db.Orders.OrderBy(d => d.Orders).ToList();
+            string[] seperate = new string[3];
+
+            var index = 0;
+            var total = 0m;
+            var final = 0m;
+            var price = 0m;
+            bool first = true;
+            foreach (var order in orderList)
             {
-                if (order.Orders.Contains())
+                if (first)
                 {
+                    seperate = order.Orders.Split("x");
 
+                    if (seperate.Count() != 1)
+                        price = decimal.Parse(seperate[1]);
+                    else
+                        price = order.Amount;
+                    first = false;
                 }
-                //if (summary == "")
-                //{
-
-                //}
+                if (orderList[index].Orders.Contains(seperate[0]))
+                {
+                    final += order.Amount;
+                    total += order.Amount;
+                    summary = seperate[0] + " x " + (total / price).ToString();
+                    index++;
+                }
+                if (orderList.Count() > index && !orderList[index].Orders.Contains(seperate[0]))
+                {
+                    detail += summary + $" kez satıldı. Toplam : {total} TL\n\n";
+                    total = 0;
+                    first = true;
+                }
             }
-            MessageBox.Show("Sipariş Özeti :");
+            string split = "____________________________________________\n";
+            MessageBox.Show(" Sipariş Özeti : \n\n" + detail + split + " Kâr : " + final.ToString() + " TL", "Ne Kadar Satıldı ?", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
