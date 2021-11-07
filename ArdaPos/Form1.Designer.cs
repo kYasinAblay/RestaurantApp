@@ -162,6 +162,7 @@ namespace ArdaPos
             this.btnDetail.Size = new System.Drawing.Size(58, 62);
             this.btnDetail.TabIndex = 6;
             this.btnDetail.UseVisualStyleBackColor = false;
+            this.btnDetail.Click += new System.EventHandler(this.btnDetail_Click);
             // 
             // btnSummary
             // 

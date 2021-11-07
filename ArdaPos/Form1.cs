@@ -3,6 +3,8 @@ using ArdaPos.DataAccess.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -185,7 +187,7 @@ namespace ArdaPos
             if (sum == 0)
                 return;
 
-            var dialog = MessageBox.Show(tableNo + "'in hesabı: " + sum + " TL. \nÖdemek istiyor musunuz ?", "Hesap Ekstresi", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            var dialog = MessageBox.Show(tableNo + "'in hesabı: " + sum + " TL. \nHesabı kapatmak istiyor musunuz ?", "Hesap Ekstresi", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (dialog == DialogResult.Yes)
             {
@@ -254,8 +256,58 @@ namespace ArdaPos
                     first = true;
                 }
             }
-            string split = "____________________________________________\n";
+            string split = "________________________________________________\n";
             MessageBox.Show(" Sipariş Özeti : \n\n" + detail + split + " Kâr : " + final.ToString() + " TL", "Ne Kadar Satıldı ?", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void btnDetail_Click(object sender, EventArgs e)
+        {
+            ExcelPackage excel = new ExcelPackage();
+
+            // name of the sheet
+            var workSheet = excel.Workbook.Worksheets.Add("Siparişler");
+
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
+
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
+
+            for (int i = 1; i <= siparisListView.Columns.Count; i++)
+            {
+                workSheet.Cells[1, i].Value = siparisListView.Columns[i - 1].Text;
+            }
+            int recordIndex = 2;
+
+            foreach (var order in db.Orders.OrderBy(x => x.Orders).ToList())
+            {
+                workSheet.Cells[recordIndex, 1].Value = order.Id;
+                workSheet.Cells[recordIndex, 2].Value = order.TableNo;
+                workSheet.Cells[recordIndex, 3].Value = order.Orders;
+                workSheet.Cells[recordIndex, 4].Value = order.Amount;
+                workSheet.Cells[recordIndex, 5].Value = order.Description;
+                recordIndex++;
+            }
+
+            workSheet.Column(1).AutoFit();
+            workSheet.Column(2).AutoFit();
+            workSheet.Column(3).AutoFit();
+            workSheet.Column(4).AutoFit();
+            workSheet.Column(5).AutoFit();
+
+            string p_strPath = "D:\\siparisler-restaurantapp.xlsx";
+
+            if (File.Exists(p_strPath))
+                File.Delete(p_strPath);
+
+            // Create excel file on physical disk 
+            FileStream objFileStrm = File.Create(p_strPath);
+            objFileStrm.Close();
+
+            // Write content to excel file 
+            File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
+            //Close Excel package
+            excel.Dispose();
         }
     }
 }
