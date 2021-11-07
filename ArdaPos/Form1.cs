@@ -299,13 +299,10 @@ namespace ArdaPos
             if (File.Exists(p_strPath))
                 File.Delete(p_strPath);
 
-            // Create excel file on physical disk 
             FileStream objFileStrm = File.Create(p_strPath);
             objFileStrm.Close();
 
-            // Write content to excel file 
             File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
-            //Close Excel package
             excel.Dispose();
 
             MessageBox.Show("Bütün satışlar, Excel dosyası olarak kaydedildi.\n Dosya yolu: " + p_strPath, "Dosya Adresi", MessageBoxButtons.OK, MessageBoxIcon.Information);
