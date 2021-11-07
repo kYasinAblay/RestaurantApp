@@ -12,3 +12,4 @@ C:\Users\Kamil\source\repos\ArdaPos\ArdaPos.DataAccess\obj\Debug\net5.0\ArdaPos.
 C:\Users\Kamil\source\repos\ArdaPos\ArdaPos.DataAccess\obj\Debug\net5.0\ref\ArdaPos.DataAccess.dll
 C:\Users\Kamil\source\repos\ArdaPos\ArdaPos.DataAccess\obj\Debug\net5.0\ArdaPos.DataAccess.pdb
 C:\Users\Kamil\source\repos\ArdaPos\ArdaPos.DataAccess\obj\Debug\net5.0\ArdaPos.DataAccess.genruntimeconfig.cache
+C:\Users\Kamil\source\repos\ArdaPos\ArdaPos.DataAccess\obj\Debug\net5.0\ArdaPos.DataAccess.csproj.AssemblyReference.cache
