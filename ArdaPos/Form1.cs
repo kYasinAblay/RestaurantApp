@@ -166,7 +166,7 @@ namespace ArdaPos
         }
         private async void Form1_Load(object sender, EventArgs e)
         {
-            if (db.Products == null)
+            if (db.Products.Count() == 0)
                 SeedData.Initialize(db);
 
             var productList = await db.Products.ToListAsync();
@@ -239,7 +239,7 @@ namespace ArdaPos
                     seperate = order.Orders.Split("x");
 
                     if (seperate.Count() != 1)
-                        price = decimal.Parse(seperate[1]);
+                        price = order.Amount / decimal.Parse(seperate[1]);
                     else
                         price = order.Amount;
                     first = false;
